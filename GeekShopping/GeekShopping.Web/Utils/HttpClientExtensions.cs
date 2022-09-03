@@ -11,11 +11,11 @@ namespace GeekShopping.Web.Utils
         public static async Task<T> ReadContentAs<T>(this HttpResponseMessage response) {
             if (!response.IsSuccessStatusCode) throw new ApplicationException("Something went wrong." + $" {response.ReasonPhrase}");
             var dateAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            return JsonSerializer.Deserialize<T>(
+           return JsonSerializer.Deserialize<T>(
                 dateAsString,
-                new JsonSerializerOptions{PropertyNameCaseInsensitive = true}
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
                 );
+
         }
 
         public static Task<HttpResponseMessage> PostAsJson<T>(this HttpClient httpClient, string url, T data)
